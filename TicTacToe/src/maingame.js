@@ -7,10 +7,10 @@ const startSquares = [
 const playerMove = document.querySelector(".playerMove")
 
 let board = {
-    occupiedSquares : startSquares,
+    occupiedSquares : [...startSquares],
     XToMove : true,
     plyCount : 0,
-    stack : [-1,-1,-1,-1,-1,-1,-1,-1],
+    stack : [-1, -1, -1, -1, -1, -1, -1, -1 ,-1],
     makeMove : function(move, inThink = true) {
         this.occupiedSquares[move] = this.XToMove ? xOccupied : oOccupied
         this.stack[this.plyCount] = move;
@@ -30,23 +30,34 @@ let board = {
         this.XToMove = !this.XToMove
     },
     resetBoard : function() {
-        this.occupiedSquares = startSquares;
-        for(let i = 0; i < 9; i++) {
-            document.getElementById(i.toString()).innerText = i;
-            document.getElementById(i.toString()).style.color = 'black'
-        }
+        this.XToMove = true;
+        this.occupiedSquares = [...startSquares];
+        this.stack = [...startSquares];
+        this.plyCount = 0;
+        document.getElementById("board").innerHTML = 
+        `
+     |     |     
+  <span id = "0">0</span>  |  <span id = "1">1</span>  |  <span id = "2">2</span>  
+_____|_____|_____
+     |     |     
+  <span id = "3">3</span>  |  <span id = "4">4</span>  |  <span id = "5">5</span>  
+_____|_____|_____   
+     |     |     
+  <span id = "6">6</span>  |  <span id = "7">7</span>  |  <span id = "8">8</span>  
+     |     |     
+        `
     },
     generateMoves : function() {
         var legalMoves = [];
 
         if (this.checkWinning() != -1) return legalMoves;
 
-        for(let i = 0; i < 9; i++) {
-            let testMove = this.occupiedSquares[i]
-            if (testMove == notOccupied) 
-                legalMoves.push(i)
-            
+        for (let i = 0; i < 9; i++) {
+            if (this.occupiedSquares[i] == notOccupied) {
+                legalMoves.push(i);
+            }
         }
+        
 
         return legalMoves;
     },
@@ -76,9 +87,6 @@ let board = {
 
 document.querySelector("#submitMove").addEventListener("click", function() {
    
-    if (alertWhoIsWinning()) return;
-
-
     const move = parseInt(playerMove.value);
 
     if (isNaN(move) || move < 0 || move > 8) {
@@ -91,21 +99,32 @@ document.querySelector("#submitMove").addEventListener("click", function() {
         return;
     }
 
+
+
+
     bestMoveRoot = -1;
     board.makeMove(move, false);
 
-    alertWhoIsWinning()
+    console.log(board.occupiedSquares)
+
+    if(alertWhoIsWinning()) return;
 
     search(maxDepth);
     board.makeMove(bestMoveRoot, false)
+
+    console.log(board.occupiedSquares)
 
     alertWhoIsWinning()
 })
 
 function alertWhoIsWinning() {
     if (board.checkWinning() != -1) {
-        
-        setTimeout(() => {alert((board.checkWinning() == 0 ? 'X ' : 'O ' ) + "has won.")}, 1)
+        alert((board.checkWinning() == 0 ? 'X ' : 'O ' ) + "has won.")
+        board.resetBoard()
+        return true;
+    } 
+    if (board.generateMoves().length == 0) {
+        alert("Draw.")
         board.resetBoard()
         return true;
     }
