@@ -31,6 +31,10 @@ let board = {
     },
     resetBoard : function() {
         this.occupiedSquares = startSquares;
+        for(let i = 0; i < 9; i++) {
+            document.getElementById(i.toString()).innerText = i;
+            document.getElementById(i.toString()).style.color = 'black'
+        }
     },
     generateMoves : function() {
         var legalMoves = [];
@@ -71,6 +75,9 @@ let board = {
 }
 
 document.querySelector("#submitMove").addEventListener("click", function() {
+   
+    if (alertWhoIsWinning()) return;
+
 
     const move = parseInt(playerMove.value);
 
@@ -80,12 +87,28 @@ document.querySelector("#submitMove").addEventListener("click", function() {
     }
 
     if (!board.generateMoves().includes(move)) {
-        alert("not a legal move buddy.");
+        alert("not a legal move buddy");
         return;
     }
 
     bestMoveRoot = -1;
     board.makeMove(move, false);
+
+    alertWhoIsWinning()
+
     search(maxDepth);
-    board.makeMove(bestMoveRoot, false);
+    board.makeMove(bestMoveRoot, false)
+
+    alertWhoIsWinning()
 })
+
+function alertWhoIsWinning() {
+    if (board.checkWinning() != -1) {
+        
+        setTimeout(() => {alert((board.checkWinning() == 0 ? 'X ' : 'O ' ) + "has won.")}, 1)
+        board.resetBoard()
+        return true;
+    }
+
+    return false;
+}
