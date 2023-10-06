@@ -3,9 +3,8 @@ let maxDepth = 8;
 let nodes = 0
 
 function search(depth, alpha, beta) {
-    console.log(nodes++)
     let legalMoves = board.generateMoves();
-    if (legalMoves.length == 0 || depth == 0) return board.checkWinning() == -1 ? 0 : -99999;
+    if (legalMoves.length == 0 || depth == 0) return board.checkWinning() == -1 ? Math.random() : -99999;
     let eval;
     let bestEval = -99999;
  
