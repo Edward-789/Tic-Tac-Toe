@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tic-Tac-Toe</title>
+        <link rel = "stylesheet" href = "src/style.css">
+    </head>
+    <body>
+        <h1>Tic-Tac-Toe</h1>
+        <p>A Tic-Tac-Toe AI to play against.</p>
+        <pre>
+        <p id = "board">
+     |     |     
+  <span id = "0">0</span>  |  <span id = "1">1</span>  |  <span id = "2">2</span>  
+_____|_____|_____
+     |     |     
+  <span id = "3">3</span>  |  <span id = "4">4</span>  |  <span id = "5">5</span>  
+_____|_____|_____   
+     |     |     
+  <span id = "6">6</span>  |  <span id = "7">7</span>  |  <span id = "8">8</span>  
+     |     |     
+</p>
+        </pre>
+        
+        <input type="text" placeholder="move" class = "playerMove">
+        <p>Type in the number of the square you want to play.</p>
+        <button id = "submitMove">Submit Move</button> You are : X
+    </body>
+</html>
+
+<script src = "src/maingame.js "></script>
+<script src="src/negamax.js"></script>
