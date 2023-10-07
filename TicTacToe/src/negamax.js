@@ -29,8 +29,3 @@ function search(depth, alpha, beta) {
 
     return bestEval;
 }
-
-    }
-
-    return bestEval;
-}
