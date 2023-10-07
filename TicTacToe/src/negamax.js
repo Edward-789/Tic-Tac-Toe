@@ -1,12 +1,12 @@
 let bestMoveRoot = -1;
-let maxDepth = 8;
+let maxDepth = 10;
 let nodes = 0
 
 function search(depth, alpha, beta) {
     let legalMoves = board.generateMoves();
     if (legalMoves.length == 0 || depth == 0) return board.checkWinning() == -1 ? Math.random() : -99999 - depth;
     let eval;
-    let bestEval = -99999;
+    let bestEval = -9999999;
  
     for (let i = 0; i < legalMoves.length; i++) {
         let move = legalMoves[i]; // Get the move from the legalMoves array
@@ -25,6 +25,11 @@ function search(depth, alpha, beta) {
                 if (alpha >= beta) break;
             }
         }
+    }
+
+    return bestEval;
+}
+
     }
 
     return bestEval;
