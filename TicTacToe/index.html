@@ -17,13 +17,17 @@ _____|_____|_____
 _____|_____|_____   
      |     |     
   <span id = "6">6</span>  |  <span id = "7">7</span>  |  <span id = "8">8</span>  
-     |     |     
-</p>
+     |     |
+    </p>
     </pre>
+    <dialog id = "dialog">
+        <p id = "dialogText"></p>
+        <button onclick = "dialog.close()" id = "dialogButton">X</button>
+    </dialog>
     <form id = "submitMove">
         <input type="text" placeholder="move" class = "playerMove">
-        <p>Type in the number of the square you want to play.</p>
-        <button>Submit Move</button> You are : X 
+        <p>Type in the number of the square you want to play, or click on the square.</p>
+        <button id = "submitMoveButton">Submit Move</button> You are : X 
     </form>
     </body>
 </html>
@@ -31,4 +35,5 @@ _____|_____|_____
 
 <script src = "src/board.js "></script>
 <script src="src/negamax.js"></script>
-<script src="src/events.js></script>
+<script src="src/events.js"></script>
+
