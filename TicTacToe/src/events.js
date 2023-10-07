@@ -10,7 +10,7 @@ for (let i = 0; i < 9; i++) {
 }   
 
 
-document.querySelector("#submitMove").addEventListener("submit", function() {
+document.querySelector("#submitMove").addEventListener("submit", function(event) {
     event.preventDefault();
    
     const move = parseInt(playerMove.value);
@@ -31,14 +31,10 @@ document.querySelector("#submitMove").addEventListener("submit", function() {
     bestMoveRoot = -1;
     board.makeMove(move, false);
 
-    console.log(board.occupiedSquares)
-
     if(alertWhoIsWinning()) return;
 
-    search(maxDepth);
+    search(maxDepth, -9999999, 9999999)
     board.makeMove(bestMoveRoot, false)
-
-    console.log(board.occupiedSquares)
 
     alertWhoIsWinning()
 })
