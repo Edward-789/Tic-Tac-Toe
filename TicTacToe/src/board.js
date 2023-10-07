@@ -46,6 +46,13 @@ _____|_____|_____
   <span id = "6">6</span>  |  <span id = "7">7</span>  |  <span id = "8">8</span>  
      |     |     
         `
+
+        for (let i = 0; i < 9; i++) {
+            document.getElementById(i).addEventListener("click", function() {
+                playerMove.value = i;
+                document.querySelector("#submitMoveButton").click()
+            }) 
+        }   
     },
     generateMoves : function() {
         var legalMoves = [];
@@ -84,3 +91,4 @@ _____|_____|_____
         return -1;
     }
 }
+
