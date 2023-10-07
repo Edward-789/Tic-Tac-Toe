@@ -54,7 +54,7 @@ function alertWhoIsWinning() {
 
 document.getElementById("dialogButton").addEventListener("click", function() {
     dialog.close()
-    if(board.checkWinning() != -1 || board.generateMoves().length == 0)board.resetBoard()
+    if(board.generateMoves().length == 0)board.resetBoard()
 })
 
 function showModal(textDisplayed) {
